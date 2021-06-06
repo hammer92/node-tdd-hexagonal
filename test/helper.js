@@ -2,7 +2,6 @@
 
 // This file contains code that we reuse
 // between our tests.
-
 const Fastify = require('fastify')
 const fp = require('fastify-plugin')
 const App = require('../app')

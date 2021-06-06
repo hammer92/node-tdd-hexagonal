@@ -22,6 +22,10 @@
     "fastify-sensible": "^3.1.0"
   },
   "devDependencies": {
+    "standard": "^16.0.3",
     "tap": "^15.0.9"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
