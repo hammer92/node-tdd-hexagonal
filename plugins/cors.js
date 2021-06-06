@@ -3,7 +3,7 @@
 const fp = require('fastify-plugin')
 
 /**
- * This plugins adds some utilities to handle http errors
+ * This plugins adds enables the use of CORS in a Fastify application.
  *
  * @see https://github.com/fastify/fastify-cors
  */
