@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+const glob = require('glob')
 const AutoLoad = require('fastify-autoload')
 
 module.exports = async function (fastify, opts) {
@@ -18,8 +19,13 @@ module.exports = async function (fastify, opts) {
 
   // This loads all plugins defined in routes
   // define your routes in one of these
-  fastify.register(AutoLoad, {
-    dir: path.join(__dirname, 'routes'),
-    options: Object.assign({}, opts)
+  glob.sync(path.join(__dirname, 'src/*/routes')).forEach(function (file) {
+    fastify.register(AutoLoad, {
+      dir: file,
+      options: Object.assign(
+        { prefix: `${process.env.APP_PREFIX}` },
+        opts
+      )
+    })
   })
 }
