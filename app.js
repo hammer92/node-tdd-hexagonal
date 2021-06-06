@@ -4,6 +4,9 @@ const path = require('path')
 const glob = require('glob')
 const AutoLoad = require('fastify-autoload')
 
+const dotEnvPath = path.resolve('.env')
+require('dotenv').config({ path: dotEnvPath })
+
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
 
@@ -23,7 +26,7 @@ module.exports = async function (fastify, opts) {
     fastify.register(AutoLoad, {
       dir: file,
       options: Object.assign(
-        { prefix: `${process.env.APP_PREFIX}` },
+        { prefix: `${process.env.API_PREFIX}` },
         opts
       )
     })
