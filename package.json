@@ -7,9 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tap \"test/**/*.test.js\"",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "test": "NODE_ENV=test tap \"test/**/*.test.js\"",
+    "start": "NODE_ENV=production fastify start -l info app.js",
+    "dev": "NODE_ENV=development fastify start -w -l info -P app.js"
   },
   "keywords": [],
   "author": "",
