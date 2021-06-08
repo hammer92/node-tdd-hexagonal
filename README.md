@@ -26,8 +26,8 @@ entre otros
 1. Instale todas las dependencias: `npm install`
 2. Ejecuta la aplicacion en modo desarrollo: `npm run dev`
 3. Entonces tendrás dos aplicaciones disponibles (APIs):
-    1. [Aplicacion APIs](src): http://localhost:3000/api
-    2. [Swagger APIs](plugins/swagger.js): http://localhost:3000/api/swagger
+    1. [Aplicacion APIs](src): http://localhost:3001/api
+    2. [Swagger APIs](plugins/swagger.js): http://localhost:3001/api/swagger
 
 ### Tests execution
 
