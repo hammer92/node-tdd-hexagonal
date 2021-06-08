@@ -9,7 +9,12 @@
   "scripts": {
     "test": "NODE_ENV=test tap \"test/**/*.test.js\"",
     "start": "NODE_ENV=production fastify start -l info app.js",
-    "dev": "NODE_ENV=development fastify start -w -l info -P app.js"
+    "dev": "NODE_ENV=development fastify start -w -l info -P app.js",
+    "seq": "sequelize-cli",
+    "seq:model": "sequelize-cli model:generate --attributes name:string --name",
+    "seq:migrate": "sequelize-cli db:migrate",
+    "seq:seed": "npx sequelize-cli seed:generate --name",
+    "seq:migration": "npx sequelize-cli migration:generate --name"
   },
   "keywords": [],
   "author": "",
@@ -23,10 +28,15 @@
     "fastify-sensible": "^3.1.0",
     "fastify-static": "^4.2.2",
     "fastify-swagger": "^4.7.0",
-    "glob": "^7.1.7"
+    "glob": "^7.1.7",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "sequelize-cli": "^6.2.0",
     "standard": "^16.0.3",
     "tap": "^15.0.9"
   },
