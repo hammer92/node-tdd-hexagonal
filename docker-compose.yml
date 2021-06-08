@@ -11,8 +11,3 @@ services:
       POSTGRES_DB: db_dev
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: localhost
-
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080

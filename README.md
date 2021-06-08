@@ -24,8 +24,12 @@ entre otros
 ### Ejecución de la aplicación
 
 1. Instale todas las dependencias: `npm install`
-2. Ejecuta la aplicacion en modo desarrollo: `npm run dev`
-3. Entonces tendrás dos aplicaciones disponibles (APIs):
+2. Ejecuta las migraciones : `npm run seq:migrate`
+   * nota: si no cuentas con una base de datos puedes ejecutar el docker-compose que
+   tiene un contenedor con una base de datos postgres que puedes usar `docker-compose up -d`
+   
+3. Ejecuta la aplicacion en modo desarrollo: `npm run dev`
+4. Entonces tendrás dos aplicaciones disponibles (APIs):
     1. [Aplicacion APIs](src): http://localhost:3001/api
     2. [Swagger APIs](plugins/swagger.js): http://localhost:3001/api/swagger
 
