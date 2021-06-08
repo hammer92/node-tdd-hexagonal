@@ -21,15 +21,15 @@ module.exports = fp(async function (fastify, opts) {
   } catch (error) {
     console.error('Unable to connect to the database:', error)
   }
-
   // loading models
+  const pathModels = path.join(process.env.APP_PATH, 'database', 'models')
   fs
-    .readdirSync(path.join(process.env.PATH, 'database', 'models'))
+    .readdirSync(pathModels)
     .filter(file => {
-      return (file.indexOf('.') !== 0) && (file !== process.env.PATH) && (file.slice(-3) === '.js')
+      return (file.indexOf('.') !== 0) && (file !== pathModels) && (file.slice(-3) === '.js')
     })
     .forEach(file => {
-      const model = require(path.join(process.env.PATH, 'database', 'models', file))(sequelize, Sequelize.DataTypes)
+      const model = require(path.join(pathModels, file))(sequelize, Sequelize.DataTypes)
       db[model.name] = model
     })
 

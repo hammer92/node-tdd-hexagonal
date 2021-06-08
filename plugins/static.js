@@ -10,7 +10,7 @@ const path = require('path')
  */
 module.exports = fp(async function (fastify, opts) {
   fastify.register(require('fastify-static'), {
-    root: path.join(process.env.PATH, 'public'),
+    root: path.join(process.env.APP_PATH, 'public'),
     prefix: '/public/' // optional: default '/'
   })
 })
