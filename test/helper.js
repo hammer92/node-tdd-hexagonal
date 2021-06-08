@@ -1,4 +1,8 @@
 'use strict'
+const path = require('path')
+
+const dotEnvPath = path.resolve('.env')
+require('dotenv').config({ path: dotEnvPath })
 
 // This file contains code that we reuse
 // between our tests.
@@ -13,16 +17,18 @@ function config () {
 }
 
 // automatically build and tear down our instance
-function build (t) {
+async function build (t) {
   const app = Fastify()
 
   // fastify-plugin ensures that all decorators
   // are exposed for testing purposes, this is
   // different from the production setup
-  app.register(fp(App), config())
+  await app.register(fp(App), config())
+
+  // await app.database.sequelize.sync()
 
   // tear down our app after we are done
-  t.tearDown(app.close.bind(app))
+  t.teardown(app.close.bind(app))
 
   return app
 }
