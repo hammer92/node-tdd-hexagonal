@@ -3,7 +3,6 @@ module.exports = {
   description: 'Crear User',
   body: {
     type: 'object',
-    required: ['email', 'password'],
     properties: {
       firstName: { type: 'string' },
       lastName: { type: 'string' },

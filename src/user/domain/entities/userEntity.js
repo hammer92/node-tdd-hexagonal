@@ -5,5 +5,8 @@ module.exports = Joi.object().keys({
     'string.empty': 'email no puede ser un campo vacío',
     'any.required': 'email es un campo obligatorio'
   }),
-  password: Joi.string().required()
+  password: Joi.string().required().min(6).messages({
+    'string.empty': 'password no puede ser un campo vacío',
+    'any.required': 'password es un campo obligatorio'
+  })
 })

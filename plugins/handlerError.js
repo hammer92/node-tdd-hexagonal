@@ -11,8 +11,9 @@ const ERROR_HANDLERS = {
 }
 const handleError = (reply) => {
   return error => {
+    console.log('handleError-------------', error)
     const handler = ERROR_HANDLERS[error.name] || ERROR_HANDLERS.defaultError
-    handler(error, reply)
+    return handler(error, reply)
   }
 }
 module.exports = fp(async function (fastify, opts) {

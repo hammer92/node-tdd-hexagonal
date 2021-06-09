@@ -17,38 +17,74 @@ t.teardown(async () => {
   await app.database.User.drop()
 })
 
-t.test('create user', async t => {
+const resposerService = (payload) => app.inject({
+  method: 'post',
+  payload,
+  url: '/api/user'
+})
+
+t.test('crear usuario', async t => {
   const payload = {
     email: 'user@yopmail.com',
     password: 'password'
   }
-  const response = await app.inject({
-    method: 'post',
-    payload,
-    url: '/api/user'
-  })
+  const response = await resposerService(payload)
   t.equal(response.statusCode, 201, 'returns a status code of 201')
   const { item, message } = JSON.parse(response.payload)
   t.equal(message, 'Actualizado con exito', 'returns a message of Actualizado con exito')
   t.equal(item.email, payload.email, 'returns the email created')
   t.end()
 })
-
 //
-// t.test('first', async t => {
-//   t.beforeEach((t) => {
-//     t.context.app = build(t)
-//   })
-//   t.test('default root route', async (t) => {
-//     const res = await t.context.app.inject({
-//       url: '/api/user'
-//     })
-//     t.same(JSON.parse(res.payload), { root: true })
-//   })
-//   t.test('apple', async t => {
-//     t.pass('apples are tasty')
-//   })
-//   t.test('banana', async t => {
-//     t.pass('bananas are yellow')
-//   })
-// })
+t.test('Este correo electrónico ya está en uso.', async t => {
+  const payload = {
+    email: 'user@yopmail.com',
+    password: 'password'
+  }
+  const response = await resposerService(payload)
+  t.equal(response.statusCode, 409)
+  const { message } = JSON.parse(response.payload)
+  t.equal(message, 'Este correo electrónico ya está en uso.')
+})
+
+t.test('email es un campo obligatorio', async t => {
+  const payload = {
+    password: 'password'
+  }
+  const response = await resposerService(payload)
+  t.equal(response.statusCode, 400, 'returns a status code of 400')
+  const { message } = JSON.parse(response.payload)
+  t.equal(message, 'email es un campo obligatorio')
+})
+
+t.test('password es un campo obligatorio', async t => {
+  const payload = {
+    email: 'user@yopmail.com'
+  }
+  const response = await resposerService(payload)
+  t.equal(response.statusCode, 400)
+  const { message } = JSON.parse(response.payload)
+  t.equal(message, 'password es un campo obligatorio')
+})
+
+t.test('password no puede ser un campo vacío', async t => {
+  const payload = {
+    email: 'user2@yopmail.com',
+    password: ''
+  }
+  const response = await resposerService(payload)
+  t.equal(response.statusCode, 400, 'returns a status code of 400')
+  const { message } = JSON.parse(response.payload)
+  t.equal(message, 'password no puede ser un campo vacío')
+})
+
+t.test('email no puede ser un campo vacío', async t => {
+  const payload = {
+    email: '',
+    password: 'password'
+  }
+  const response = await resposerService(payload)
+  t.equal(response.statusCode, 400, 'returns a status code of 400')
+  const { message } = JSON.parse(response.payload)
+  t.equal(message, 'email no puede ser un campo vacío')
+})
